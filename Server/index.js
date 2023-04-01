@@ -1,11 +1,9 @@
 const express = require('express');
 const app = express();
-const http = require('http');
 const cors = require('cors');
-const { Server } = require('socket.io');
+const http = require('http');
 const server = http.createServer(app);
-
-app.use(cors());
+const { Server } = require('socket.io');
 
 const io = new Server(server, {
   cors: {
@@ -15,6 +13,7 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
+  console.log(`Connect to chat Ap ${socket.id}`);
   socket.on('chat', (msg) => {
     socket.broadcast.emit('receiveMsg', msg);
   });
