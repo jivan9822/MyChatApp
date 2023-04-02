@@ -16,14 +16,20 @@ const App = () => {
     });
   }, [socket]);
   return (
-    <div>
-      <input type='text' onChange={(e) => setMsg(e.target.value)} />
-      <button onClick={onSendMsgClick}>Send Msg</button>
-      <ul>
-        {showMsg.map((each, ind) => (
-          <li key={ind}>{each}</li>
-        ))}
-      </ul>
+    <div className='mainDiv'>
+      <div className='messageDiv'>
+        <ul>
+          {showMsg.map((each, ind) => (
+            <li key={ind}>{each}</li>
+          ))}
+        </ul>
+      </div>
+      <div className='sendMsgDiv'>
+        <input type='text' onChange={(e) => setMsg(e.target.value)} />
+        <button className='btn' onClick={onSendMsgClick}>
+          Send
+        </button>
+      </div>
     </div>
   );
 };
