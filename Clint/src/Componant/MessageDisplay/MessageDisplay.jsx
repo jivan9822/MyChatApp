@@ -2,8 +2,8 @@ import io from 'socket.io-client';
 import classes from './message.module.css';
 import { useEffect, useState } from 'react';
 
-const socket = io.connect('http://localhost:3000');
-// const socket = io.connect('https://mychatapp-9e7l.onrender.com');
+// const socket = io.connect('http://localhost:3000');
+const socket = io.connect('https://mychatapp-9e7l.onrender.com');
 
 const MessageDisplay = (props) => {
   const welComeMsg = props.user && `Welcome - ${props.user}`;
