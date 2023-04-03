@@ -7,17 +7,13 @@ const io = require('socket.io')(3000, {
 
 io.on('connection', (socket) => {
   socket.on('chat', (msg) => {
+    socket.emit('receiveMsg', msg);
     if (msg.id) {
-      console.log(1);
       socket.to(msg.id).emit('receiveMsg', msg);
     } else if (msg.roomNo) {
-      console.log(2);
       socket.to(msg.roomNo).emit('receiveMsg', msg);
-      socket.emit('receiveMsg', msg);
     } else {
-      console.log(3);
       socket.broadcast.emit('receiveMsg', msg);
-      socket.emit('receiveMsg', msg);
     }
   });
   socket.on('Join', (roomNo) => {

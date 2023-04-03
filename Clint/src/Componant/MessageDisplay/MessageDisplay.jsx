@@ -31,7 +31,6 @@ const MessageDisplay = (props) => {
       container.scrollTop = container.scrollHeight;
     });
   }, [socket]);
-  console.log(showMsg);
   return (
     <div className={classes.mainDiv}>
       <div className={classes.messageDiv} ref={(node) => setContainer(node)}>
