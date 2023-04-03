@@ -1,35 +1,22 @@
-import io from 'socket.io-client';
-import './App.css';
 import { useEffect, useState } from 'react';
-
-const socket = io.connect('http://localhost:3000');
+import MessageDisplay from './Componant/MessageDisplay/MessageDisplay';
+import Login from './Componant/Login/Login';
 
 const App = () => {
-  const [msg, setMsg] = useState('');
-  const [showMsg, setShowMsg] = useState([]);
-  const onSendMsgClick = (event) => {
-    socket.emit('chat', msg);
+  const [userName, setUserName] = useState();
+  const [login, SetLogin] = useState(true);
+
+  const getUserName = (name) => {
+    setUserName(name);
+    SetLogin(false);
   };
-  useEffect(() => {
-    socket.on('receiveMsg', (msg) => {
-      setShowMsg((old) => [msg, ...old]);
-    });
-  }, [socket]);
   return (
-    <div className='mainDiv'>
-      <div className='messageDiv'>
-        <ul>
-          {showMsg.map((each, ind) => (
-            <li key={ind}>{each}</li>
-          ))}
-        </ul>
-      </div>
-      <div className='sendMsgDiv'>
-        <input type='text' onChange={(e) => setMsg(e.target.value)} />
-        <button className='btn' onClick={onSendMsgClick}>
-          Send
-        </button>
-      </div>
+    <div>
+      {login ? (
+        <Login onGetName={getUserName} />
+      ) : (
+        <MessageDisplay user={userName} />
+      )}
     </div>
   );
 };
